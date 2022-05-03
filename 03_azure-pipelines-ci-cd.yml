@@ -27,7 +27,7 @@ stages:
   - job: WebApp
     displayName: Build Web App Job
     pool:
-      name: Hosted Windows 2019 with VS2019 
+      name: Default
       vmImage: 'windows-2019'
     variables:
       BuildConfiguration: release
@@ -38,9 +38,9 @@ stages:
         command: restore
         projects: '**/WebApp.csproj'
     
-    - task: WhiteSource Bolt@20
+    # - task: WhiteSource Bolt@20
 
-    - powershell: |
+    # - powershell: |
        Write-Host "Hello World"
        $paths = Get-ChildItem -include *.csproj -Recurse
        foreach($pathobject in $paths) 
@@ -60,7 +60,7 @@ stages:
       displayName: Prepare analysis on SonarCloud
       inputs:
         SonarCloud: SonarCloud
-        organization: houssemdellai
+        organization: mvc
         projectKey: WebAppWithDatabaseDemo
 
     - task: DotNetCoreCLI@2
@@ -98,7 +98,7 @@ stages:
   - job: Database
     displayName: Build Database Job
     pool:
-      vmImage: 'windows-2019'
+      name: Default
       demands: msbuild
 
     steps:
@@ -116,7 +116,7 @@ stages:
   - job: Selenium
     displayName: Build UI Tests Job
     pool:
-      vmImage: 'windows-2019'
+      name: Default
       demands: msbuild
 
     steps:
@@ -142,7 +142,7 @@ stages:
   - job: Infrastructure
     displayName: Publish Infra files Job
     pool:
-      vmImage: 'ubuntu-latest'
+      name: Default
     steps:
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: ARM templates'
@@ -157,7 +157,7 @@ stages:
   - job: Dev
     displayName: Deploy to Dev Job
     pool:
-      vmImage: 'windows-2019'
+      name: Default
     variables:
       Parameters.ConnectedServiceName: 'Visual Studio Enterprise' # couldn't be referenced
       ResourceGroupName: '$(Prefix)-$(Release.EnvironmentName)-$(UniqueId)-RG'
