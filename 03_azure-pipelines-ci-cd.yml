@@ -32,7 +32,7 @@ stages:
 
   - job: WebApp
     displayName: Build Web App
-   pool:
+  pool:
     name: Default
     variables:
       BuildConfiguration: release
@@ -288,7 +288,7 @@ stages:
     displayName: Deploy Apps to DEV
     dependsOn: Create_DEV
     pool:
-      vmImage: 'windows-2019'
+      name: Default
     steps:
 
     - checkout: none
@@ -339,7 +339,7 @@ stages:
     displayName: Run Selenium tests in DEV
     dependsOn: Deploy_DEV
     pool:
-      vmImage: 'windows-2019'
+      name: Default
     steps:
 
     - checkout: none
