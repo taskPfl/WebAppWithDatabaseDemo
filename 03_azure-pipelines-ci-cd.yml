@@ -88,8 +88,8 @@ stages:
     - task: SonarCloudAnalyze@1
       displayName: Run Code Analysis
 
-    - task: SonarCloudPublish@1
-      displayName: Publish Quality Gate Result
+    # - task: SonarCloudPublish@1
+    #   displayName: Publish Quality Gate Result
 
     - task: PublishBuildArtifacts@1
       displayName: Publish Artifact (WebApp.zip)
