@@ -30,12 +30,12 @@ steps:
     projects: '**/WebApp.csproj'
     arguments: '--configuration $(BuildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: Run Unit Tests
-  inputs:
-    command: test
-    projects: '**/*UnitTest*.csproj'
-    arguments: '--configuration $(BuildConfiguration)'
+# - task: DotNetCoreCLI@2
+#   displayName: Run Unit Tests
+#   inputs:
+#     command: test
+#     projects: '**/*UnitTest*.csproj'
+#     arguments: '--configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Create Web App Package (.zip)
