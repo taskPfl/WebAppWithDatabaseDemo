@@ -32,9 +32,8 @@ stages:
 
   - job: WebApp
     displayName: Build Web App
-    pool:
-      name: Hosted Windows 2019 with VS2019 
-      vmImage: 'windows-2019'
+   pool:
+    name: Default
     variables:
       BuildConfiguration: release
     steps:
@@ -123,7 +122,7 @@ stages:
   - job: Database
     displayName: Build Database
     pool:
-      vmImage: 'windows-2019'
+      name: Default
       demands: msbuild
     steps:
 
@@ -141,7 +140,7 @@ stages:
   - job: Selenium
     displayName: Build UI Tests
     pool:
-      vmImage: 'windows-2019'
+      name: Default
       demands: msbuild
 
     steps:
@@ -167,7 +166,7 @@ stages:
   - job: Infrastructure
     displayName: Publish Infra files
     pool:
-      vmImage: 'ubuntu-latest'
+      name: Default
     steps:
     
     - task: PublishBuildArtifacts@1
@@ -197,7 +196,7 @@ stages:
   - job: Create_DEV
     displayName: Create DEV
     pool:
-      vmImage: 'windows-2019'
+      name: Default
     steps:
 
     - checkout: none
