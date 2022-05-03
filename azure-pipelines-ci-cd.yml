@@ -32,8 +32,8 @@ stages:
   - job: WebApp
     displayName: Build Web App
     pool:
-      name: Hosted Windows 2019 with VS2019 
-      vmImage: 'windows-2019'
+      name: Default 
+      # vmImage: 'windows-2019'
     variables:
       BuildConfiguration: release
     steps:
@@ -115,7 +115,7 @@ stages:
   - job: Database
     displayName: Build Database
     pool:
-      vmImage: 'windows-2019'
+      name: Default
       demands: msbuild
     steps:
 
@@ -133,7 +133,7 @@ stages:
   - job: Selenium
     displayName: Build UI Tests
     pool:
-      vmImage: 'windows-2019'
+      name: Default
       demands: msbuild
 
     steps:
@@ -159,7 +159,7 @@ stages:
   - job: Infrastructure
     displayName: Publish Infra files
     pool:
-      vmImage: 'ubuntu-latest'
+      name: Default
     steps:
     
     - task: PublishBuildArtifacts@1
@@ -189,7 +189,7 @@ stages:
   - job: Create_DEV
     displayName: Create DEV
     pool:
-      vmImage: 'windows-2019'
+      name: Default
     steps:
 
     - checkout: none
@@ -203,7 +203,7 @@ stages:
       displayName: Validate ARM templates
       enabled: ${{ parameters.runCompletePipeline }}
       inputs:
-        # azureSubscription: $(azureSubscription) # 'WebAppWithDatabaseDemo_spn'
+        azureSubscription: $(azureSubscription) # 'WebAppWithDatabaseDemo_spn'
         action: 'Create Or Update Resource Group'
         resourceGroupName: '$(ResourceGroupName)'
         location: 'West Europe'
@@ -255,7 +255,7 @@ stages:
     displayName: Deploy Apps to DEV
     dependsOn: Create_DEV
     pool:
-      vmImage: 'windows-2019'
+      name: Default
     steps:
 
     - checkout: none
@@ -306,7 +306,7 @@ stages:
     displayName: Run Selenium tests in DEV
     dependsOn: Deploy_DEV
     pool:
-      vmImage: 'windows-2019'
+      name: Default
     steps:
 
     - checkout: none
