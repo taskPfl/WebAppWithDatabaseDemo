@@ -54,8 +54,9 @@ stages:
       #      $node.AppendChild($child)
       #      $doc.Save($path)
       #  }
-      workingDirectory: WebApp
-      displayName: 'PS : Add Project GUID'
+      # workingDirectory: WebApp
+      # displayName: 
+      #   PS : Add Project GUID'
     - task: SonarCloudPrepare@1
       displayName: Prepare analysis on SonarCloud
       inputs:
